@@ -24,7 +24,7 @@ GestureMath is a project developed during the Innovation Marathon organized by C
 
 - Jatin (Team Leader)
 - Nitin Kushwah ([Github](https://github.com/NitinKushwah-05))
-- Himanshu 
+- Himanshu ([Github](https://github.com/Himanshu-Mandowra))
 - Umesh
 - Harshit
 

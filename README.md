@@ -1,5 +1,7 @@
 # GestureMath
 
+## Description
+
 GestureMath is a project developed during the Innovation Marathon organized by Code Unnati and SAP. It's an application that leverages machine learning and web technologies to enable users to solve math problems using hand gestures captured through a webcam. The project aims to provide an interactive and engaging way for users to learn and practice math concepts.
 
 ## Key Features
@@ -21,7 +23,7 @@ GestureMath is a project developed during the Innovation Marathon organized by C
 ## Team
 
 - Jatin (Team Leader)
-- Nitin ([Github](https://github.com/NitinKushwah-05))
+- Nitin Kushwah ([Github](https://github.com/NitinKushwah-05))
 - Himanshu 
 - Umesh
 - Harshit

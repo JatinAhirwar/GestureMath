@@ -51,9 +51,9 @@ def restart():
     ans = 0
     finger_touched = False
     counter = 0
-    random_number1 = random.randint(0, 5)
-    random_number2 = random.randint(0, 5)
-    random_number3 = random.randint(1, 3)
+    random_number1 = random.randint(1, 6) #for now its 1 to 6
+    random_number2 = random.randint(1, 6) #for now its 1 to 6
+    random_number3 = random.randint(1, 2) #for now its only + and - operator
     if random_number3 == 1:
         rand_operator = "+"
     elif random_number3 == 2:
@@ -68,6 +68,7 @@ def gen_frames():
         success, frame = camera.read()  # Read the camera frame
         if not success:
             return jsonify({'error': 'Error reading frame'})
+        
         frame = cv2.flip(frame, 1)  # Mirror image
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert to RGB
 
@@ -75,7 +76,7 @@ def gen_frames():
         if results.multi_hand_landmarks:
             for landmarks in results.multi_hand_landmarks:
                 handedness = results.multi_handedness[results.multi_hand_landmarks.index(landmarks)].classification[0].label
-                mp_drawing.draw_landmarks(frame, landmarks, mp_hands.HAND_CONNECTIONS)
+                # mp_drawing.draw_landmarks(frame, landmarks, mp_hands.HAND_CONNECTIONS)
 
                 index_tip = landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
                 thumb_tip = landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP]

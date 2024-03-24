@@ -30,6 +30,12 @@ GestureMath is a project developed during the Innovation Marathon organized by C
 
 ## How to Use
 
+Before running the code, make sure you have the following dependencies installed:
+
+- Python 3.x
+- OpenCV (`pip install opencv-python`)
+- MediaPipe (`pip install mediapipe`)
+
 1. Clone the repository to your local machine.
 2. Install the required dependencies specified in the `requirements.txt` file.
 3. Run the Flask application using the command `python app.py`.

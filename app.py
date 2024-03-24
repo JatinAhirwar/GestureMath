@@ -24,25 +24,30 @@ counter: int = 0
 result = False
 THRESHOLD_DISTANCE = 0.05
 
+
 # Functions to manipulate global variables
 def increment_counter():
     global counter
     counter += 1
     print(counter)
 
+
 def decrement_counter():
     global counter
     counter -= 1
     print(counter)
+
 
 def make_true():
     global both_hands_detected
     both_hands_detected = True
     print("both hands are :" + both_hands_detected)
 
+
 def make_false():
     global both_hands_detected
     both_hands_detected = False
+
 
 def restart():
     global both_hands_detected, ans, finger_touched, counter, random_number1, random_number2, rand_operator, result
@@ -51,15 +56,16 @@ def restart():
     ans = 0
     finger_touched = False
     counter = 0
-    random_number1 = random.randint(1, 6) #for now its 1 to 6
-    random_number2 = random.randint(1, 6) #for now its 1 to 6
-    random_number3 = random.randint(1, 2) #for now its only + and - operator
+    random_number1 = random.randint(1, 6)  # for now its 1 to 6
+    random_number2 = random.randint(1, 6)  # for now its 1 to 6
+    random_number3 = random.randint(1, 2)  # for now its only + and - operator
     if random_number3 == 1:
         rand_operator = "+"
     elif random_number3 == 2:
         rand_operator = "-"
     elif random_number3 == 3:
         rand_operator = "*"
+
 
 # Generator function to process frames from the webcam
 def gen_frames():
@@ -68,14 +74,15 @@ def gen_frames():
         success, frame = camera.read()  # Read the camera frame
         if not success:
             return jsonify({'error': 'Error reading frame'})
-        
+
         frame = cv2.flip(frame, 1)  # Mirror image
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert to RGB
 
         results = hands.process(rgb_frame)
         if results.multi_hand_landmarks:
             for landmarks in results.multi_hand_landmarks:
-                handedness = results.multi_handedness[results.multi_hand_landmarks.index(landmarks)].classification[0].label
+                handedness = results.multi_handedness[results.multi_hand_landmarks.index(landmarks)].classification[
+                    0].label
                 # mp_drawing.draw_landmarks(frame, landmarks, mp_hands.HAND_CONNECTIONS)
 
                 index_tip = landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
@@ -113,20 +120,24 @@ def gen_frames():
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+
 # Flask routes
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
 @app.route('/video_feed')
 def video_feed():
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 @app.route('/get_count')
 def get_count():
     return jsonify({
         'count': counter
     })
+
 
 @app.route('/get_numbers')
 def get_numbers():
@@ -139,10 +150,12 @@ def get_numbers():
         'count': counter
     })
 
+
 @app.route('/game')
 def game():
     restart()
     return render_template('game.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
